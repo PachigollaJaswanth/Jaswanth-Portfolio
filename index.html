@@ -23,6 +23,9 @@
       border-bottom: 2px solid #00d4ff;
       padding: 0.5rem 1rem;
       font-family: 'Orbitron', sans-serif;
+      position: fixed;
+      width: 100%;
+      z-index: 50;
     }
     .nav-item {
       font-weight: 700;
@@ -51,12 +54,24 @@
     }
     #mobile-menu {
       background: #1e1e2f;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      height: 100%;
+      z-index: 50;
+      transition: right 0.3s ease;
+      padding: 1rem;
+    }
+    #mobile-menu.active {
+      right: 0;
     }
     #mobile-menu .nav-item {
       color: #ffffff;
       padding: 1rem;
       font-size: 1.1rem;
       display: block;
+      text-align: left;
     }
     #mobile-menu .nav-item:hover {
       color: #00d4ff;
@@ -67,6 +82,7 @@
       border-radius: 8px;
       padding: 1rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-height: 100px;
     }
     .section-card:hover, .education-card:hover {
       transform: translateY(-5px);
@@ -140,6 +156,7 @@
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       animation: slideIn 0.5s ease-in;
+      min-height: 120px;
     }
     .cert-card:hover {
       transform: scale(1.02);
@@ -174,6 +191,7 @@
       border-radius: 8px;
       padding: 1rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-height: 100px;
     }
     .expertise-card:hover {
       transform: translateY(-5px);
@@ -185,6 +203,7 @@
       border-radius: 8px;
       padding: 1rem;
       transition: background 0.3s ease;
+      min-height: 100px;
     }
     .interests-card:hover {
       background: #1e40af;
@@ -210,29 +229,33 @@
         padding: 0.75rem;
         font-size: 0.9rem;
         border-width: 1px;
+        min-height: 80px;
       }
       .section-card h3, .expertise-card p, .interests-card p, .cert-card h3 {
-        font-size: 1rem;
+        font-size: 0.95rem;
       }
       .alert-ticker {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
       }
       .navbar {
         padding: 0.5rem;
       }
       #mobile-menu .nav-item {
         padding: 0.75rem;
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
       section {
-        padding-top: 2.5rem;
-        padding-bottom: 2.5rem;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
       }
       h1 {
-        font-size: 2.25rem;
+        font-size: 1.875rem;
       }
-      p.text-xl {
-        font-size: 1rem;
+      h2 {
+        font-size: 1.5rem;
+      }
+      p.text-xl, p.text-lg {
+        font-size: 0.95rem;
       }
       .alert-row {
         flex-direction: column;
@@ -244,14 +267,41 @@
         margin-right: 0;
         margin-bottom: 0.25rem;
       }
+      .whoami-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      #command-input {
+        width: 100%;
+      }
+      .nav-item {
+        font-size: 0.875rem;
+      }
+      .navbar .h-16 {
+        height: 3rem;
+      }
+      .cert-flag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+      }
+      .flag-code {
+        font-size: 0.8rem;
+      }
+    }
+    @media (min-width: 641px) {
+      .nav-item:hover {
+        animation: glitch 0.3s;
+      }
     }
   </style>
 </head>
 <body class="font-roboto-mono bg-[#1a1a2e]">
-  <nav class="fixed w-full shadow-md z-10 navbar">
+  <nav class="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
-        <div class="hidden md:flex space-x-4 items-center">
+        <div class="hidden md:flex space-x-2 items-center">
           <a href="#home" class="nav-item">Home</a>
           <a href="#about" class="nav-item">About</a>
           <a href="#skills" class="nav-item">Skills</a>
@@ -269,7 +319,7 @@
           </button>
         </div>
       </div>
-      <div id="mobile-menu" class="hidden md:hidden bg-[#1e1e2f] px-4 pb-4">
+      <div id="mobile-menu" class="hidden md:hidden">
         <div class="flex justify-end">
           <button id="mobile-menu-close" class="text-white p-2">
             <i class="fas fa-times"></i>
@@ -290,7 +340,7 @@
   </nav>
 
   <section id="home" class="min-h-screen flex items-center justify-center bg-[#1a1a2e] text-white">
-    <div class="text-center px-4">
+    <div class="text-center px-4 max-w-full">
       <h1 class="text-5xl md:text-5xl font-bold mb-4">Jaswanth Pachigolla</h1>
       <p class="text-xl md:text-xl mb-6">SOC Analyst | Cybersecurity Professional</p>
       <div class="alert-ticker">ALERT: Phishing Detected | Suspicious IP Blocked | CTF Challenge Completed</div>
@@ -298,21 +348,21 @@
     </div>
   </section>
 
-  <section id="about" class="py-10 bg-[#1a1a2e]">
+  <section id="about" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">About Me</h2>
       <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">
         Aspiring cybersecurity professional with 1.1 years of SOC experience, currently pursuing an M.Tech in Cyber Security at Jain University. Skilled in security operations, log analysis, threat intelligence, and incident response. Hands-on experience with SIEM tools (Elastic ELK), endpoint detection (Sophos EDR/XDR), and phishing investigations. Eager to apply my expertise in security monitoring, vulnerability assessment, and cloud security to an internship role. Passionate about learning emerging cyber threats, improving security frameworks, and contributing to strong cybersecurity strategies.
       </p>
-      <div class="mt-4 text-center">
-        <input id="command-input" type="text" placeholder="Type 'whoami'" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff] w-full md:w-auto">
-        <button onclick="runCommand()" class="px-4 py-2 bg-[#00d4ff] text-black rounded mt-2 md:ml-2 md:mt-0">Run</button>
+      <div class="mt-4 text-center whoami-container">
+        <input id="command-input" type="text" placeholder="Type 'whoami'" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff] w-full">
+        <button onclick="runCommand()" class="px-4 py-2 bg-[#00d4ff] text-black rounded mt-2 w-full md:w-auto md:mt-0">Run</button>
         <p id="command-output" class="mt-2 hidden text-green-400">Jaswanth Pachigolla: SOC Analyst | Cybersecurity Pro</p>
       </div>
     </div>
   </section>
 
-  <section id="skills" class="py-10 bg-[#1a1a2e]">
+  <section id="skills" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Skills</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -352,7 +402,7 @@
     </div>
   </section>
 
-  <section id="experience" class="py-10 bg-[#1a1a2e]">
+  <section id="experience" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Experience</h2>
       <div class="section-card">
@@ -454,7 +504,7 @@
     </div>
   </section>
 
-  <section id="education" class="py-10 bg-[#1a1a2e]">
+  <section id="education" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Education</h2>
       <div class="space-y-6">
@@ -478,7 +528,7 @@
     </div>
   </section>
 
-  <section id="certifications" class="py-10 bg-[#1a1a2e]">
+  <section id="certifications" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Certifications</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -522,7 +572,7 @@
     </div>
   </section>
 
-  <section id="areas-of-expertise" class="py-10 bg-[#1a1a2e]">
+  <section id="areas-of-expertise" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Areas of Expertise</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -566,7 +616,7 @@
     </div>
   </section>
 
-  <section id="projects" class="py-10 bg-[#1a1a2e]">
+  <section id="projects" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Projects</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -586,7 +636,7 @@
     </div>
   </section>
 
-  <section id="interests" class="py-10 bg-[#1a1a2e]">
+  <section id="interests" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Main Interests</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -622,7 +672,7 @@
     </div>
   </section>
 
-  <section id="contact" class="py-10 bg-[#1a1a2e]">
+  <section id="contact" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Contact</h2>
       <div class="text-center">
@@ -642,11 +692,21 @@
     const mobileMenu = document.getElementById('mobile-menu');
 
     mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.add('active');
     });
 
     mobileMenuClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
       mobileMenu.classList.add('hidden');
+    });
+
+    // Close mobile menu when clicking a nav link
+    document.querySelectorAll('#mobile-menu .nav-item').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        mobileMenu.classList.add('hidden');
+      });
     });
 
     // Whoami Command
