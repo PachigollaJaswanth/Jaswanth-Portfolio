@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jaswanth Pachigolla - Cybersecurity Portfolio">
+  <meta name="author" content="Jaswanth Pachigolla">
+  <title>Jaswanth Pachigolla | Cybersecurity Portfolio</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAPFBMVEUAAAD///8AAABVVVVVVVX/AAAAAACqqqr/AAAAAACZmZmZmZn/AAAAAAC+vr7/AAAAAAC9vb3/AAAAAAD///9K1e5SAAAAEHRSTlMAAQIDBAYICQoLDA0ODxAREhQ6ZQAAAJtJREFUeNqdkksOgCAMRIsl/f8vW8sO0EYoOQ9yL+xNQoA9AG3vE8gCBL6M4EMEQWAXwJ0gAL4E4UMgAR8iCfiQQcCHSAI+ZBTwIZOAH7EEfMgk4EMmAR8yCfgQS8CHTAI+5BLwIZeAD7kEfMgk4EMuAR8yCfiQS8CHXAI+5BLwIZeAD7kEfMgk4EMuAR8yCfiQS8CHXAI+5BLwIZeAD7kEfMgk4EN+AMv2M3YkVfeBAAAAAElFTkSuQmCC">
+  <script src="https://cdn.tailwindcss.com/3.4.13"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body {
+      background: #1a1a2e;
+      color: #ffffff;
+      font-family: 'Roboto Mono', monospace;
+      background-image: radial-gradient(circle, rgba(0, 82, 204, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .navbar {
+      background: #1e1e2f;
+      border-bottom: 2px solid #00d4ff;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .nav-item {
+      font-weight: 700;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      position: relative;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .nav-item:hover {
+      color: #00d4ff;
+      transform: scale(1.05);
+      animation: glitch 0.3s;
+    }
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00d4ff;
+      transition: width 0.3s ease;
+    }
+    .nav-item:hover::after {
+      width: 100%;
+    }
+    #mobile-menu .nav-item {
+      color: #ffffff;
+    }
+    #mobile-menu .nav-item:hover {
+      color: #00d4ff;
+    }
+    .section-card, .education-card {
+      background: #252545;
+      border: 1px solid #00d4ff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .section-card:hover, .education-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+    .education-card {
+      border-left: none !important;
+    }
+    .project-card::after {
+      content: 'Flag Captured';
+      display: inline-block;
+      background: #00ff00;
+      color: #000;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-left: 0.5rem;
+    }
+    .alert-ticker {
+      background: #1e1e2f;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      color: #00ff00;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: ticker 10s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    #experience .alert-row {
+      display: flex;
+      align-items: center;
+      background: #1e1e2f;
+      border-left: 4px solid;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      animation: fadeIn 0.5s ease-in;
+    }
+    #experience .alert-row.high { border-left-color: #ff5555; }
+    #experience .alert-row.medium { border-left-color: #ffaa00; }
+    #experience .alert-row.low { border-left-color: #00ff00; }
+    #experience .alert-row:hover {
+      background: #252545;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    }
+    .alert-timestamp {
+      color: #888;
+      min-width: 120px;
+      margin-right: 1rem;
+    }
+    .alert-severity {
+      color: #fff;
+      font-weight: bold;
+      min-width: 80px;
+      margin-right: 1rem;
+    }
+    .alert-description {
+      flex: 1;
+      color: #ddd;
+    }
+    .cert-card {
+      background: #1e1e2f;
+      border: 2px solid #00ff00;
+      border-radius: 8px;
+      padding: 1rem;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: slideIn 0.5s ease-in;
+    }
+    .cert-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    }
+    .cert-flag {
+      background: #00ff00;
+      color: #000;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+    }
+    .flag-code {
+      display: none;
+      background: #252545;
+      border: 1px solid #00d4ff;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      color: #00ff00;
+      font-size: 0.9rem;
+    }
+    .cert-card.active .flag-code {
+      display: block;
+    }
+    .expertise-card {
+      background: #252545;
+      border: 1px solid #00d4ff;
+      border-radius: 8px;
+      padding: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .expertise-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+    .interests-card {
+      background: #1e3a8a;
+      border: 1px solid #00d4ff;
+      border-radius: 8px;
+      padding: 1rem;
+      transition: background 0.3s ease;
+    }
+    .interests-card:hover {
+      background: #1e40af;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+  </style>
+</head>
+<body class="font-roboto-mono bg-[#1a1a2e]">
+  <nav class="fixed w-full shadow-md z-10 navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="hidden md:flex space-x-4 items-center">
+          <a href="#home" class="nav-item">Home</a>
+          <a href="#about" class="nav-item">About</a>
+          <a href="#skills" class="nav-item">Skills</a>
+          <a href="#experience" class="nav-item">Experience</a>
+          <a href="#education" class="nav-item">Education</a>
+          <a href="#certifications" class="nav-item">Certifications</a>
+          <a href="#areas-of-expertise" class="nav-item">Areas of Expertise</a>
+          <a href="#projects" class="nav-item">Projects</a>
+          <a href="#interests" class="nav-item">Interests</a>
+          <a href="#contact" class="nav-item">Contact</a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-btn" class="text-white">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden bg-[#1e1e2f] px-4 pb-4">
+        <a href="#home" class="block nav-item py-2">Home</a>
+        <a href="#about" class="block nav-item py-2">About</a>
+        <a href="#skills" class="block nav-item py-2">Skills</a>
+        <a href="#experience" class="block nav-item py-2">Experience</a>
+        <a href="#education" class="block nav-item py-2">Education</a>
+        <a href="#certifications" class="block nav-item py-2">Certifications</a>
+        <a href="#areas-of-expertise" class="block nav-item py-2">Areas of Expertise</a>
+        <a href="#projects" class="block nav-item py-2">Projects</a>
+        <a href="#interests" class="block nav-item py-2">Interests</a>
+        <a href="#contact" class="block nav-item py-2">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="min-h-screen flex items-center justify-center bg-[#1a1a2e] text-white">
+    <div class="text-center">
+      <h1 class="text-5xl font-bold mb-4">Jaswanth Pachigolla</h1>
+      <p class="text-xl mb-6">SOC Analyst | Cybersecurity Professional</p>
+      <div class="alert-ticker">ALERT: Phishing Detected | Suspicious IP Blocked | CTF Challenge Completed</div>
+      <a href="#contact" class="px-6 py-3 mt-4 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4]">Get in Touch</a>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">About Me</h2>
+      <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">
+        Aspiring cybersecurity professional with 1.1 years of SOC experience, currently pursuing an M.Tech in Cyber Security at Jain University. Skilled in security operations, log analysis, threat intelligence, and incident response. Hands-on experience with SIEM tools (Elastic ELK), endpoint detection (Sophos EDR/XDR), and phishing investigations. Eager to apply my expertise in security monitoring, vulnerability assessment, and cloud security to an internship role. Passionate about learning emerging cyber threats, improving security frameworks, and contributing to strong cybersecurity strategies.
+      </p>
+      <div class="mt-4 text-center">
+        <input id="command-input" type="text" placeholder="Type 'whoami'" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff]">
+        <button onclick="runCommand()" class="px-4 py-2 bg-[#00d4ff] text-black rounded ml-2">Run</button>
+        <p id="command-output" class="mt-2 hidden text-green-400">Jaswanth Pachigolla: SOC Analyst | Cybersecurity Pro</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Skills</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="section-card text-center" data-score="90">
+          <i class="fas fa-shield-alt text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Elastic ELK SIEM <span class="text-green-400">[90/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="85">
+          <i class="fas fa-laptop-code text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Sophos EDR/XDR <span class="text-green-400">[85/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="80">
+          <i class="fas fa-ticket-alt text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Jira/Uniview <span class="text-green-400">[80/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="75">
+          <i class="fas fa-cloud text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Cloudflare WAF <span class="text-green-400">[75/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="80">
+          <i class="fas fa-envelope text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Mimecast <span class="text-green-400">[80/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="70">
+          <i class="fas fa-cloud text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">AWS Basics <span class="text-green-400">[70/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="75">
+          <i class="fas fa-bug text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">bWAPP <span class="text-green-400">[75/100]</span></p>
+        </div>
+        <div class="section-card text-center" data-score="85">
+          <i class="fas fa-search text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Threat Intelligence <span class="text-green-400">[85/100]</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Experience</h2>
+      <div class="section-card">
+        <h3 class="text-xl font-semibold text-[#00d4ff] mb-2">SOC Analyst | CyberNX, Mumbai</h3>
+        <p class="text-gray-400 mb-4">June 2023 – July 2024</p>
+        <div class="space-y-2">
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2023-06-15 14:30]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Monitored 24x7 SOC events to detect, analyze, and respond to security incidents.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2023-06-20 09:15]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Investigated 20–35 daily incidents from EDR/XDR, Firewalls, IDS/IPS, and Endpoints.</span>
+          </div>
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2023-07-01 16:45]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Fine-tuned SIEM rules, reducing false positives by 7% and improving detection accuracy.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2023-07-10 11:20]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Researched threats and vulnerabilities, creating tailored advisories for clients.</span>
+          </div>
+          <div class="alert-row low">
+            <span class="alert-timestamp">[2023-08-05 13:50]</span>
+            <span class="alert-severity">[LOW]</span>
+            <span class="alert-description">Integrated ELK agents into SIEM for new assets as per client requirements.</span>
+          </div>
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2023-08-15 08:30]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Investigated phishing emails, domains, and IPs using VirusTotal, MX Toolbox, Shodan, etc.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2023-09-02 15:10]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Collaborated with clients to whitelist alerts, reducing alert fatigue.</span>
+          </div>
+          <div class="alert-row low">
+            <span class="alert-timestamp">[2023-09-12 10:25]</span>
+            <span class="alert-severity">[LOW]</span>
+            <span class="alert-description">Hands-on with ticketing tools like JIRA and ZOHO Uniview for case management.</span>
+          </div>
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2023-10-01 17:40]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Worked with Vulnerability Management and IR teams for coordinated incident handling.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2023-10-15 12:00]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Generated weekly/monthly security reports and managed asset inventories.</span>
+          </div>
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2023-11-05 09:55]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Proficient in phishing and URL analysis, enhancing email security posture.</span>
+          </div>
+          <div class="alert-row low">
+            <span class="alert-timestamp">[2023-11-20 14:15]</span>
+            <span class="alert-severity">[LOW]</span>
+            <span class="alert-description">Familiar with cloud security on Azure and AWS platforms.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2023-12-10 16:30]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Responded to alerts across diverse client environments to mitigate threats.</span>
+          </div>
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2024-01-08 11:45]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Strong client communication as SPOC, ensuring transparency and trust.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2024-02-15 13:20]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Assisted team in incident analysis and security operations.</span>
+          </div>
+          <div class="alert-row low">
+            <span class="alert-timestamp">[2024-03-01 10:10]</span>
+            <span class="alert-severity">[LOW]</span>
+            <span class="alert-description">Sound knowledge of Incident/Event Lifecycle and networking fundamentals.</span>
+          </div>
+          <div class="alert-row medium">
+            <span class="alert-timestamp">[2024-04-12 15:50]</span>
+            <span class="alert-severity">[MEDIUM]</span>
+            <span class="alert-description">Practical understanding of MITRE ATT&CK for threat mapping.</span>
+          </div>
+          <div class="alert-row high">
+            <span class="alert-timestamp">[2024-05-20 08:40]</span>
+            <span class="alert-severity">[HIGH]</span>
+            <span class="alert-description">Led shifts, delegated tasks to 7+ analysts, and improved SOC workflows.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Education</h2>
+      <div class="space-y-6">
+        <div class="education-card">
+          <h3 class="text-xl font-semibold text-[#00d4ff] mb-2">M.Tech in Cyber Security</h3>
+          <p class="text-gray-300">Jain Deemed to be University, Bangalore | 8.00 SGPA</p>
+        </div>
+        <div class="education-card">
+          <h3 class="text-xl font-semibold text-[#00d4ff] mb-2">B.Tech</h3>
+          <p class="text-gray-300">Pydah College of Engineering and Technology, Visakhapatnam | 2021 | 7.2 CGPA</p>
+        </div>
+        <div class="education-card">
+          <h3 class="text-xl font-semibold text-[#00d4ff] mb-2">Intermediate</h3>
+          <p class="text-gray-300">Sri Chaitanya College | 2017 | 72%</p>
+        </div>
+        <div class="education-card">
+          <h3 class="text-xl font-semibold text-[#00d4ff] mb-2">SSC</h3>
+          <p class="text-gray-300">Sri Chaitanya Techno School | 2015 | 82%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Certifications</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="cert-card" onclick="this.classList.toggle('active')">
+          <div class="cert-flag">Flag: CC-2025</div>
+          <h3 class="text-lg font-semibold text-white">ISC2 Certified in Cybersecurity (CC)</h3>
+          <p class="text-gray-400 text-sm">March 2025</p>
+          <div class="flag-code">FLAG{CC_COMPLETED}</div>
+        </div>
+        <div class="cert-card" onclick="this.classList.toggle('active')">
+          <div class="cert-flag">Flag: CEH-2025</div>
+          <h3 class="text-lg font-semibold text-white">Certified Ethical Hacker (CEH)</h3>
+          <p class="text-gray-400 text-sm">Present | EC-Council</p>
+          <div class="flag-code">FLAG{CEH_COMPLETED}</div>
+        </div>
+        <div class="cert-card" onclick="this.classList.toggle('active')">
+          <div class="cert-flag">Flag: CCSP-2025</div>
+          <h3 class="text-lg font-semibold text-white">Certified Cloud Security Professional (CCSP)</h3>
+          <p class="text-gray-400 text-sm">March 2025 | Coursera</p>
+          <div class="flag-code">FLAG{CCSP_COMPLETED}</div>
+        </div>
+        <div class="cert-card" onclick="this.classList.toggle('active')">
+          <div class="cert-flag">Flag: IR-2025</div>
+          <h3 class="text-lg font-semibold text-white">IBM Incident Response and Cyber Forensics</h3>
+          <p class="text-gray-400 text-sm">March 2025 | Coursera</p>
+          <div class="flag-code">FLAG{IR_COMPLETED}</div>
+        </div>
+        <div class="cert-card" onclick="this.classList.toggle('active')">
+          <div class="cert-flag">Flag: SPLUNK-2025</div>
+          <h3 class="text-lg font-semibold text-white">EDUCBA Introduction to Splunk</h3>
+          <p class="text-gray-400 text-sm">March 2025 | Coursera</p>
+          <div class="flag-code">FLAG{SPLUNK_COMPLETED}</div>
+        </div>
+        <div class="cert-card" onclick="this.classList.toggle('active')">
+          <div class="cert-flag">Flag: CLOUD-2025</div>
+          <h3 class="text-lg font-semibold text-white">IBM Introduction to Cloud Computing</h3>
+          <p class="text-gray-400 text-sm">March 2025 | Coursera</p>
+          <div class="flag-code">FLAG{CLOUD_COMPLETED}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas-of-expertise" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Areas of Expertise</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="expertise-card text-center">
+          <i class="fas fa-file-alt text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Report Writing</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-tasks text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Triaging</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-users text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Project & Team Management</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-bolt text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Agile & Situational Awareness</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-brain text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Learn Fast, Flexible & Compliant</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-shield-alt text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Monitoring Log Sources & SIEM Tools</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-comments text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Effective Communication With Stakeholders</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-search text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Security Assessments / Root Cause Analysis</p>
+        </div>
+        <div class="expertise-card text-center">
+          <i class="fas fa-handshake text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Planning & Collaborative Working</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Projects</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="section-card project-card">
+          <h3 class="text-lg font-semibold text-white">Password Strength Analyzer</h3>
+          <p class="text-gray-400 text-sm">Python-based tool to evaluate password strength using regex and entropy calculations.</p>
+        </div>
+        <div class="section-card project-card">
+          <h3 class="text-lg font-semibold text-white">Network Intrusion Detection</h3>
+          <p class="text-gray-400 text-sm">Implemented Snort IDS to detect and alert on suspicious network traffic.</p>
+        </div>
+        <div class="section-card project-card">
+          <h3 class="text-lg font-semibold text-white">CTF Challenge Platform</h3>
+          <p class="text-gray-400 text-sm">Developed a web-based platform for hosting CTF challenges using Flask.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="interests" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Main Interests</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="interests-card text-center">
+          <i class="fas fa-chart-line text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Monitoring Logs</p>
+        </div>
+        <div class="interests-card text-center">
+          <i class="fas fa-search text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Threat Intelligence</p>
+        </div>
+        <div class="interests-card text-center">
+          <i class="fas fa-cloud text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Cloud Computing</p>
+        </div>
+        <div class="interests-card text-center">
+          <i class="fas fa-bug text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Vulnerability Assessment</p>
+        </div>
+        <div class="interests-card text-center">
+          <i class="fas fa-chart-bar text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Reports / Dashboards Creation</p>
+        </div>
+        <div class="interests-card text-center">
+          <i class="fas fa-shield-alt text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Incident Handling</p>
+        </div>
+        <div class="interests-card text-center">
+          <i class="fas fa-exclamation-triangle text-[#00d4ff] text-2xl mb-2"></i>
+          <p class="text-lg font-semibold text-white">Risk & Root Cause Analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 bg-[#1a1a2e]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Contact</h2>
+      <div class="text-center">
+        <p class="text-lg text-gray-300 mb-4">Email: <a href="mailto:jaswanthsecure@gmail.com" class="text-[#00d4ff] hover:underline">jaswanthsecure@gmail.com</a></p>
+        <p class="text-lg text-gray-300 mb-4">Phone: +91-6304830549</p>
+        <div class="mt-4">
+          <input id="resume-code" type="text" placeholder="Enter code for resume" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff]">
+          <button onclick="downloadResume()" class="px-4 py-2 bg-[#00d4ff] text-black rounded ml-2">Download Resume</button>
+          <p id="resume-error" class="mt-2 hidden text-red-400">Incorrect code. Try again.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Mobile Menu Toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Whoami Command
+    function runCommand() {
+      const input = document.getElementById('command-input').value;
+      const output = document.getElementById('command-output');
+      if (input.toLowerCase() === 'whoami') {
+        output.classList.remove('hidden');
+      } else {
+        output.classList.add('hidden');
+      }
+    }
+
+    // Resume Download
+    function downloadResume() {
+      const code = document.getElementById('resume-code').value;
+      const error = document.getElementById('resume-error');
+      if (code === '9999') {
+        error.classList.add('hidden');
+        const link = document.createElement('a');
+        link.href = 'data:application/pdf;base64,JVBERi0xLjc...'; // Replace with actual base64 resume PDF
+        link.download = 'Jaswanth_Pachigolla_Resume.pdf';
+        link.click();
+      } else {
+        error.classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
