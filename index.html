@@ -22,8 +22,6 @@
       background: #1e1e2f;
       border-bottom: 2px solid #00d4ff;
       padding: 0.5rem 1rem;
-      display: flex;
-      align-items: center;
       font-family: 'Orbitron', sans-serif;
     }
     .nav-item {
@@ -51,8 +49,14 @@
     .nav-item:hover::after {
       width: 100%;
     }
+    #mobile-menu {
+      background: #1e1e2f;
+    }
     #mobile-menu .nav-item {
       color: #ffffff;
+      padding: 1rem;
+      font-size: 1.1rem;
+      display: block;
     }
     #mobile-menu .nav-item:hover {
       color: #00d4ff;
@@ -61,7 +65,7 @@
       background: #252545;
       border: 1px solid #00d4ff;
       border-radius: 8px;
-      padding: 1.5rem;
+      padding: 1rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .section-card:hover, .education-card:hover {
@@ -201,6 +205,46 @@
       80% { transform: translate(2px, -2px); }
       100% { transform: translate(0); }
     }
+    @media (max-width: 640px) {
+      .section-card, .education-card, .expertise-card, .interests-card, .cert-card {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        border-width: 1px;
+      }
+      .section-card h3, .expertise-card p, .interests-card p, .cert-card h3 {
+        font-size: 1rem;
+      }
+      .alert-ticker {
+        font-size: 0.8rem;
+      }
+      .navbar {
+        padding: 0.5rem;
+      }
+      #mobile-menu .nav-item {
+        padding: 0.75rem;
+        font-size: 1rem;
+      }
+      section {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+      }
+      h1 {
+        font-size: 2.25rem;
+      }
+      p.text-xl {
+        font-size: 1rem;
+      }
+      .alert-row {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 0.8rem;
+      }
+      .alert-timestamp, .alert-severity {
+        min-width: auto;
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+      }
+    }
   </style>
 </head>
 <body class="font-roboto-mono bg-[#1a1a2e]">
@@ -226,44 +270,49 @@
         </div>
       </div>
       <div id="mobile-menu" class="hidden md:hidden bg-[#1e1e2f] px-4 pb-4">
-        <a href="#home" class="block nav-item py-2">Home</a>
-        <a href="#about" class="block nav-item py-2">About</a>
-        <a href="#skills" class="block nav-item py-2">Skills</a>
-        <a href="#experience" class="block nav-item py-2">Experience</a>
-        <a href="#education" class="block nav-item py-2">Education</a>
-        <a href="#certifications" class="block nav-item py-2">Certifications</a>
-        <a href="#areas-of-expertise" class="block nav-item py-2">Areas of Expertise</a>
-        <a href="#projects" class="block nav-item py-2">Projects</a>
-        <a href="#interests" class="block nav-item py-2">Interests</a>
-        <a href="#contact" class="block nav-item py-2">Contact</a>
+        <div class="flex justify-end">
+          <button id="mobile-menu-close" class="text-white p-2">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <a href="#home" class="nav-item">Home</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#skills" class="nav-item">Skills</a>
+        <a href="#experience" class="nav-item">Experience</a>
+        <a href="#education" class="nav-item">Education</a>
+        <a href="#certifications" class="nav-item">Certifications</a>
+        <a href="#areas-of-expertise" class="nav-item">Areas of Expertise</a>
+        <a href="#projects" class="nav-item">Projects</a>
+        <a href="#interests" class="nav-item">Interests</a>
+        <a href="#contact" class="nav-item">Contact</a>
       </div>
     </div>
   </nav>
 
   <section id="home" class="min-h-screen flex items-center justify-center bg-[#1a1a2e] text-white">
-    <div class="text-center">
-      <h1 class="text-5xl font-bold mb-4">Jaswanth Pachigolla</h1>
-      <p class="text-xl mb-6">SOC Analyst | Cybersecurity Professional</p>
+    <div class="text-center px-4">
+      <h1 class="text-5xl md:text-5xl font-bold mb-4">Jaswanth Pachigolla</h1>
+      <p class="text-xl md:text-xl mb-6">SOC Analyst | Cybersecurity Professional</p>
       <div class="alert-ticker">ALERT: Phishing Detected | Suspicious IP Blocked | CTF Challenge Completed</div>
-      <a href="#contact" class="px-6 py-3 mt-4 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4]">Get in Touch</a>
+      <a href="#contact" class="px-6 py-3 mt-4 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Get in Touch</a>
     </div>
   </section>
 
-  <section id="about" class="py-20 bg-[#1a1a2e]">
+  <section id="about" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">About Me</h2>
       <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">
         Aspiring cybersecurity professional with 1.1 years of SOC experience, currently pursuing an M.Tech in Cyber Security at Jain University. Skilled in security operations, log analysis, threat intelligence, and incident response. Hands-on experience with SIEM tools (Elastic ELK), endpoint detection (Sophos EDR/XDR), and phishing investigations. Eager to apply my expertise in security monitoring, vulnerability assessment, and cloud security to an internship role. Passionate about learning emerging cyber threats, improving security frameworks, and contributing to strong cybersecurity strategies.
       </p>
       <div class="mt-4 text-center">
-        <input id="command-input" type="text" placeholder="Type 'whoami'" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff]">
-        <button onclick="runCommand()" class="px-4 py-2 bg-[#00d4ff] text-black rounded ml-2">Run</button>
+        <input id="command-input" type="text" placeholder="Type 'whoami'" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff] w-full md:w-auto">
+        <button onclick="runCommand()" class="px-4 py-2 bg-[#00d4ff] text-black rounded mt-2 md:ml-2 md:mt-0">Run</button>
         <p id="command-output" class="mt-2 hidden text-green-400">Jaswanth Pachigolla: SOC Analyst | Cybersecurity Pro</p>
       </div>
     </div>
   </section>
 
-  <section id="skills" class="py-20 bg-[#1a1a2e]">
+  <section id="skills" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Skills</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -303,7 +352,7 @@
     </div>
   </section>
 
-  <section id="experience" class="py-20 bg-[#1a1a2e]">
+  <section id="experience" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Experience</h2>
       <div class="section-card">
@@ -405,7 +454,7 @@
     </div>
   </section>
 
-  <section id="education" class="py-20 bg-[#1a1a2e]">
+  <section id="education" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Education</h2>
       <div class="space-y-6">
@@ -429,7 +478,7 @@
     </div>
   </section>
 
-  <section id="certifications" class="py-20 bg-[#1a1a2e]">
+  <section id="certifications" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Certifications</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -473,7 +522,7 @@
     </div>
   </section>
 
-  <section id="areas-of-expertise" class="py-20 bg-[#1a1a2e]">
+  <section id="areas-of-expertise" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Areas of Expertise</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -517,7 +566,7 @@
     </div>
   </section>
 
-  <section id="projects" class="py-20 bg-[#1a1a2e]">
+  <section id="projects" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Projects</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -537,7 +586,7 @@
     </div>
   </section>
 
-  <section id="interests" class="py-20 bg-[#1a1a2e]">
+  <section id="interests" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Main Interests</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -573,16 +622,14 @@
     </div>
   </section>
 
-  <section id="contact" class="py-20 bg-[#1a1a2e]">
+  <section id="contact" class="py-10 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Contact</h2>
       <div class="text-center">
         <p class="text-lg text-gray-300 mb-4">Email: <a href="mailto:jaswanthsecure@gmail.com" class="text-[#00d4ff] hover:underline">jaswanthsecure@gmail.com</a></p>
         <p class="text-lg text-gray-300 mb-4">Phone: +91-6304830549</p>
         <div class="mt-4">
-          <input id="resume-code" type="text" placeholder="Enter code for resume" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff]">
-          <button onclick="downloadResume()" class="px-4 py-2 bg-[#00d4ff] text-black rounded ml-2">Download Resume</button>
-          <p id="resume-error" class="mt-2 hidden text-red-400">Incorrect code. Try again.</p>
+          <a href="https://example.com/Jaswanth_Pachigolla_Resume.pdf" download class="px-4 py-2 bg-[#00d4ff] text-black rounded font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Download Resume</a>
         </div>
       </div>
     </div>
@@ -590,9 +637,16 @@
 
   <script>
     // Mobile Menu Toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-      const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileMenuClose.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
     });
 
     // Whoami Command
@@ -603,21 +657,6 @@
         output.classList.remove('hidden');
       } else {
         output.classList.add('hidden');
-      }
-    }
-
-    // Resume Download
-    function downloadResume() {
-      const code = document.getElementById('resume-code').value;
-      const error = document.getElementById('resume-error');
-      if (code === '9999') {
-        error.classList.add('hidden');
-        const link = document.createElement('a');
-        link.href = 'data:application/pdf;base64,JVBERi0xLjc...'; // Replace with actual base64 resume PDF
-        link.download = 'Jaswanth_Pachigolla_Resume.pdf';
-        link.click();
-      } else {
-        error.classList.remove('hidden');
       }
     }
   </script>
