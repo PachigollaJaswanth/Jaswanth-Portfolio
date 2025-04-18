@@ -114,39 +114,6 @@
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-    #experience .alert-row {
-      display: flex;
-      align-items: center;
-      background: #1e1e2f;
-      border-left: 4px solid;
-      margin-bottom: 0.5rem;
-      padding: 0.75rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      animation: fadeIn 0.5s ease-in;
-    }
-    #experience .alert-row.high { border-left-color: #ff5555; }
-    #experience .alert-row.medium { border-left-color: #ffaa00; }
-    #experience .alert-row.low { border-left-color: #00ff00; }
-    #experience .alert-row:hover {
-      background: #252545;
-      box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
-    }
-    .alert-timestamp {
-      color: #888;
-      min-width: 120px;
-      margin-right: 1rem;
-    }
-    .alert-severity {
-      color: #fff;
-      font-weight: bold;
-      min-width: 80px;
-      margin-right: 1rem;
-    }
-    .alert-description {
-      flex: 1;
-      color: #ddd;
-    }
     .cert-card {
       background: #1e1e2f;
       border: 2px solid #00ff00;
@@ -208,6 +175,44 @@
     .interests-card:hover {
       background: #1e40af;
     }
+    #terminal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      padding: 2rem;
+    }
+    #terminal-overlay.active {
+      display: flex;
+    }
+    .terminal-text {
+      color: #00ff00;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      max-width: 90%;
+    }
+    .contact-option {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .contact-option a {
+      color: #00d4ff;
+      text-decoration: none;
+    }
+    .contact-option a:hover {
+      text-decoration: underline;
+    }
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(-20px); }
       to { opacity: 1; transform: translateX(0); }
@@ -257,16 +262,6 @@
       p.text-xl, p.text-lg {
         font-size: 0.95rem;
       }
-      .alert-row {
-        flex-direction: column;
-        align-items: flex-start;
-        font-size: 0.8rem;
-      }
-      .alert-timestamp, .alert-severity {
-        min-width: auto;
-        margin-right: 0;
-        margin-bottom: 0.25rem;
-      }
       .whoami-container {
         display: flex;
         flex-direction: column;
@@ -288,6 +283,10 @@
       }
       .flag-code {
         font-size: 0.8rem;
+      }
+      .terminal-text {
+        font-size: 0.9rem;
+        padding: 1rem;
       }
     }
     @media (min-width: 641px) {
@@ -339,12 +338,16 @@
     </div>
   </nav>
 
+  <div id="terminal-overlay">
+    <div class="terminal-text"></div>
+  </div>
+
   <section id="home" class="min-h-screen flex items-center justify-center bg-[#1a1a2e] text-white">
     <div class="text-center px-4 max-w-full">
       <h1 class="text-5xl md:text-5xl font-bold mb-4">Jaswanth Pachigolla</h1>
-      <p class="text-xl md:text-xl mb-6">SOC Analyst | Cybersecurity Professional</p>
+      <p class="text-xl md:text-xl mb-6">SOC Analyst | Cybersecurity Enthusiast | Offensive Security Learner</p>
       <div class="alert-ticker">ALERT: Phishing Detected | Suspicious IP Blocked | CTF Challenge Completed</div>
-      <a href="#contact" class="px-6 py-3 mt-4 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Get in Touch</a>
+      <button onclick="startTerminalAnimation()" class="px-6 py-3 mt-4 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Get in Touch</button>
     </div>
   </section>
 
@@ -408,98 +411,24 @@
       <div class="section-card">
         <h3 class="text-xl font-semibold text-[#00d4ff] mb-2">SOC Analyst | CyberNX, Mumbai</h3>
         <p class="text-gray-400 mb-4">June 2023 – July 2024</p>
-        <div class="space-y-2">
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2023-06-15 14:30]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Monitored 24x7 SOC events to detect, analyze, and respond to security incidents.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2023-06-20 09:15]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Investigated 20–35 daily incidents from EDR/XDR, Firewalls, IDS/IPS, and Endpoints.</span>
-          </div>
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2023-07-01 16:45]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Fine-tuned SIEM rules, reducing false positives by 7% and improving detection accuracy.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2023-07-10 11:20]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Researched threats and vulnerabilities, creating tailored advisories for clients.</span>
-          </div>
-          <div class="alert-row low">
-            <span class="alert-timestamp">[2023-08-05 13:50]</span>
-            <span class="alert-severity">[LOW]</span>
-            <span class="alert-description">Integrated ELK agents into SIEM for new assets as per client requirements.</span>
-          </div>
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2023-08-15 08:30]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Investigated phishing emails, domains, and IPs using VirusTotal, MX Toolbox, Shodan, etc.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2023-09-02 15:10]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Collaborated with clients to whitelist alerts, reducing alert fatigue.</span>
-          </div>
-          <div class="alert-row low">
-            <span class="alert-timestamp">[2023-09-12 10:25]</span>
-            <span class="alert-severity">[LOW]</span>
-            <span class="alert-description">Hands-on with ticketing tools like JIRA and ZOHO Uniview for case management.</span>
-          </div>
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2023-10-01 17:40]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Worked with Vulnerability Management and IR teams for coordinated incident handling.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2023-10-15 12:00]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Generated weekly/monthly security reports and managed asset inventories.</span>
-          </div>
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2023-11-05 09:55]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Proficient in phishing and URL analysis, enhancing email security posture.</span>
-          </div>
-          <div class="alert-row low">
-            <span class="alert-timestamp">[2023-11-20 14:15]</span>
-            <span class="alert-severity">[LOW]</span>
-            <span class="alert-description">Familiar with cloud security on Azure and AWS platforms.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2023-12-10 16:30]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Responded to alerts across diverse client environments to mitigate threats.</span>
-          </div>
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2024-01-08 11:45]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Strong client communication as SPOC, ensuring transparency and trust.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2024-02-15 13:20]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Assisted team in incident analysis and security operations.</span>
-          </div>
-          <div class="alert-row low">
-            <span class="alert-timestamp">[2024-03-01 10:10]</span>
-            <span class="alert-severity">[LOW]</span>
-            <span class="alert-description">Sound knowledge of Incident/Event Lifecycle and networking fundamentals.</span>
-          </div>
-          <div class="alert-row medium">
-            <span class="alert-timestamp">[2024-04-12 15:50]</span>
-            <span class="alert-severity">[MEDIUM]</span>
-            <span class="alert-description">Practical understanding of MITRE ATT&CK for threat mapping.</span>
-          </div>
-          <div class="alert-row high">
-            <span class="alert-timestamp">[2024-05-20 08:40]</span>
-            <span class="alert-severity">[HIGH]</span>
-            <span class="alert-description">Led shifts, delegated tasks to 7+ analysts, and improved SOC workflows.</span>
-          </div>
-        </div>
+        <ul class="text-gray-300 list-disc ml-6 space-y-2">
+          <li>Monitored and responded to real-time security incidents in a 24x7 SOC environment.</li>
+          <li>Conducted phishing investigations using SIEM (Elastic ELK) and EDR tools (Sophos EDR/XDR).</li>
+          <li>Utilized Elastic ELK, Sophos EDR/XDR, and Mimecast for daily security operations and threat analysis.</li>
+          <li>Investigated 20–35 daily incidents from EDR/XDR, Firewalls, IDS/IPS, and endpoints.</li>
+          <li>Fine-tuned SIEM rules, reducing false positives by 7% and improving detection accuracy.</li>
+          <li>Researched threats and vulnerabilities, creating tailored advisories for clients.</li>
+          <li>Integrated ELK agents into SIEM for new assets as per client requirements.</li>
+          <li>Analyzed phishing emails, domains, and IPs using VirusTotal, MX Toolbox, and Shodan.</li>
+          <li>Collaborated with clients to whitelist alerts, reducing alert fatigue.</li>
+          <li>Managed cases using ticketing tools like JIRA and ZOHO Uniview.</li>
+          <li>Worked with Vulnerability Management and Incident Response teams for coordinated handling.</li>
+          <li>Generated weekly/monthly security reports and maintained asset inventories.</li>
+          <li>Applied cloud security knowledge on Azure and AWS platforms.</li>
+          <li>Responded to alerts across diverse client environments to mitigate threats.</li>
+          <li>Assisted team in incident analysis and security operations.</li>
+          <li>Led shifts, delegated tasks to 7+ analysts, and optimized SOC workflows.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -677,7 +606,8 @@
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Contact</h2>
       <div class="text-center">
         <p class="text-lg text-gray-300 mb-4">Email: <a href="mailto:jaswanthsecure@gmail.com" class="text-[#00d4ff] hover:underline">jaswanthsecure@gmail.com</a></p>
-        <p class="text-lg text-gray-300 mb-4">Phone: +91-6304830549</p>
+        <p class="text-lg text-gray-300 mb-4">LinkedIn: <a href="https://www.linkedin.com/in/jaswanth-pachigolla-59945b33a/" target="_blank" class="text-[#00d4ff] hover:underline">Jaswanth Pachigolla</a></p>
+        <p class="text-lg text-gray-300 mb-4">Phone: +91-9346081211</p>
         <div class="mt-4">
           <a href="https://example.com/Jaswanth_Pachigolla_Resume.pdf" download class="px-4 py-2 bg-[#00d4ff] text-black rounded font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Download Resume</a>
         </div>
@@ -701,7 +631,6 @@
       mobileMenu.classList.add('hidden');
     });
 
-    // Close mobile menu when clicking a nav link
     document.querySelectorAll('#mobile-menu .nav-item').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
@@ -718,6 +647,40 @@
       } else {
         output.classList.add('hidden');
       }
+    }
+
+    // Terminal Hack Animation
+    function startTerminalAnimation() {
+      const overlay = document.getElementById('terminal-overlay');
+      const terminalText = document.querySelector('.terminal-text');
+      const messages = [
+        'Initiating secure connection...',
+        'Bypassing firewall...',
+        'Access granted.',
+        'Contact Options:',
+        '<div class="contact-option"><i class="fas fa-envelope"></i> Email: <a href="mailto:jaswanthsecure@gmail.com">jaswanthsecure@gmail.com</a></div>',
+        '<div class="contact-option"><i class="fab fa-linkedin"></i> Visit LinkedIn: <a href="https://www.linkedin.com/in/jaswanth-pachigolla-59945b33a/" target="_blank">Jaswanth Pachigolla</a></div>',
+        '<div class="contact-option"><i class="fab fa-whatsapp"></i> <a href="https://wa.me/919346081211" target="_blank">+91-9346081211</a></div>'
+      ];
+      let currentMessage = 0;
+
+      overlay.classList.add('active');
+      terminalText.innerHTML = '';
+
+      function displayNextMessage() {
+        if (currentMessage < messages.length) {
+          terminalText.innerHTML += messages[currentMessage] + '\n';
+          currentMessage++;
+          setTimeout(displayNextMessage, 800);
+        } else {
+          setTimeout(() => {
+            overlay.classList.remove('active');
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+          }, 2000);
+        }
+      }
+
+      displayNextMessage();
     }
   </script>
 </body>
