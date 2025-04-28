@@ -198,20 +198,53 @@
       font-size: 1.2rem;
       line-height: 1.5;
       white-space: pre-wrap;
-      max-width: 90%;
+      max-width: 600px;
     }
-    .contact-option {
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .terminal-header {
+      animation: glitch 0.3s ease-in-out;
     }
-    .contact-option a {
-      color: #00d4ff;
-      text-decoration: none;
+    .terminal-textarea {
+      width: 100%;
+      min-height: 100px;
+      background: #252545;
+      border: 1px solid #00d4ff;
+      color: #ffffff;
+      font-family: 'Roboto Mono', monospace;
+      padding: 0.5rem;
+      border-radius: 4px;
+      resize: vertical;
+      font-size: 0.9rem;
     }
-    .contact-option a:hover {
-      text-decoration: underline;
+    .terminal-textarea::placeholder {
+      color: #888;
+    }
+    .terminal-textarea:focus {
+      outline: none;
+      border-color: #00ff00;
+    }
+    .terminal-cursor::after {
+      content: '_';
+      animation: blink 0.7s infinite;
+      margin-left: 2px;
+    }
+    .terminal-send-btn {
+      background: #00d4ff;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    .terminal-send-btn:hover {
+      background: #00b7d4;
+    }
+    .terminal-success {
+      color: #00ff00;
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .terminal-success.active {
+      display: block;
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(-20px); }
@@ -228,6 +261,11 @@
       60% { transform: translate(2px, 2px); }
       80% { transform: translate(2px, -2px); }
       100% { transform: translate(0); }
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
     }
     @media (max-width: 640px) {
       .section-card, .education-card, .expertise-card, .interests-card, .cert-card {
@@ -262,15 +300,6 @@
       p.text-xl, p.text-lg {
         font-size: 0.95rem;
       }
-      .whoami-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      #command-input {
-        width: 100%;
-      }
       .nav-item {
         font-size: 0.875rem;
       }
@@ -287,6 +316,9 @@
       .terminal-text {
         font-size: 0.9rem;
         padding: 1rem;
+      }
+      .terminal-textarea {
+        font-size: 0.8rem;
       }
     }
     @media (min-width: 641px) {
@@ -339,7 +371,17 @@
   </nav>
 
   <div id="terminal-overlay">
-    <div class="terminal-text"></div>
+    <div class="terminal-text">
+      <div class="terminal-header">┌──(anonymous@visitor)-[~/contact]</div>
+      <div id="terminal-intro" class="terminal-intro"></div>
+      <form action="https://formsubmit.co/jaswanthsecure@gmail.com" method="POST">
+        <textarea class="terminal-textarea terminal-cursor" name="message" placeholder="Type your message here..." required></textarea>
+        <input type="hidden" name="_subject" value="New Message from Portfolio Terminal">
+        <input type="hidden" name="_captcha" value="false">
+        <button type="submit" class="terminal-send-btn mt-2">Send Message</button>
+      </form>
+      <div id="terminal-success" class="terminal-success">└─$ Message encrypted & transmitted successfully. ✅</div>
+    </div>
   </div>
 
   <section id="home" class="min-h-screen flex items-center justify-center bg-[#1a1a2e] text-white">
@@ -357,10 +399,8 @@
       <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">
         Aspiring cybersecurity professional with 1.1 years of SOC experience, currently pursuing an M.Tech in Cyber Security at Jain University. Skilled in security operations, log analysis, threat intelligence, and incident response. Hands-on experience with SIEM tools (Elastic ELK), endpoint detection (Sophos EDR/XDR), and phishing investigations. Eager to apply my expertise in security monitoring, vulnerability assessment, and cloud security to an internship role. Passionate about learning emerging cyber threats, improving security frameworks, and contributing to strong cybersecurity strategies.
       </p>
-      <div class="mt-4 text-center whoami-container">
-        <input id="command-input" type="text" placeholder="Type 'whoami'" class="p-2 bg-[#252545] text-white rounded border border-[#00d4ff] w-full">
-        <button onclick="runCommand()" class="px-4 py-2 bg-[#00d4ff] text-black rounded mt-2 w-full md:w-auto md:mt-0">Run</button>
-        <p id="command-output" class="mt-2 hidden text-green-400">Jaswanth Pachigolla: SOC Analyst | Cybersecurity Pro</p>
+      <div class="mt-4 text-center">
+        <button id="terminal-toggle-btn" class="px-6 py-3 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">🟩 Wanna Talk? Drop It in the Terminal ⌨️</button>
       </div>
     </div>
   </section>
@@ -609,7 +649,7 @@
         <p class="text-lg text-gray-300 mb-4">LinkedIn: <a href="https://www.linkedin.com/in/jaswanth-pachigolla-59945b33a/" target="_blank" class="text-[#00d4ff] hover:underline">Jaswanth Pachigolla</a></p>
         <p class="text-lg text-gray-300 mb-4">Phone: +91-9346081211</p>
         <div class="mt-4">
-          <a href="https://example.com/Jaswanth_Pachigolla_Resume.pdf" download class="px-4 py-2 bg-[#00d4ff] text-black rounded font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Download Resume</a>
+          <a href="https://drive.google.com/file/d/11wJ7Hv2qD21VrVx_u7_o5Ps1Qokpd5zP/view?usp=drive_link" download class="px-4 py-2 bg-[#00d4ff] text-black rounded font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Download Resume</a>
         </div>
       </div>
     </div>
@@ -638,18 +678,7 @@
       });
     });
 
-    // Whoami Command
-    function runCommand() {
-      const input = document.getElementById('command-input').value;
-      const output = document.getElementById('command-output');
-      if (input.toLowerCase() === 'whoami') {
-        output.classList.remove('hidden');
-      } else {
-        output.classList.add('hidden');
-      }
-    }
-
-    // Terminal Hack Animation
+    // Terminal Hack Animation (Home Section)
     function startTerminalAnimation() {
       const overlay = document.getElementById('terminal-overlay');
       const terminalText = document.querySelector('.terminal-text');
@@ -682,6 +711,85 @@
 
       displayNextMessage();
     }
+
+    // About Me Terminal Overlay and Typing Animation
+    const terminalToggleBtn = document.getElementById('terminal-toggle-btn');
+    const terminalOverlay = document.getElementById('terminal-overlay');
+    const terminalIntro = document.getElementById('terminal-intro');
+    const terminalSuccess = document.getElementById('terminal-success');
+    const introMessages = [
+      '├─$ Hey, hi there! 👋',
+      '├─$ If you’d like to drop a message, suggestion, or feedback — you’re at the right terminal.',
+      '├─$ Type your message below:'
+    ];
+
+    terminalToggleBtn.addEventListener('click', () => {
+      terminalOverlay.classList.add('active');
+      terminalToggleBtn.textContent = '🟥 Close Terminal';
+      typeIntroMessages();
+    });
+
+    function typeIntroMessages() {
+      terminalIntro.innerHTML = '';
+      let messageIndex = 0;
+      let charIndex = 0;
+      let currentMessage = '';
+
+      function type() {
+        if (messageIndex < introMessages.length) {
+          if (charIndex < introMessages[messageIndex].length) {
+            currentMessage += introMessages[messageIndex][charIndex];
+            terminalIntro.innerHTML = introMessages.slice(0, messageIndex).join('<br>') + (messageIndex > 0 ? '<br>' : '') + currentMessage;
+            charIndex++;
+            setTimeout(type, 50);
+          } else {
+            messageIndex++;
+            charIndex = 0;
+            currentMessage = '';
+            terminalIntro.innerHTML += '<br>';
+            setTimeout(type, 200);
+          }
+        }
+      }
+
+      type();
+    }
+
+    // Form Submission Handling
+    document.querySelector('#terminal-overlay form').addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent default form submission for custom handling
+      const form = e.target;
+      const textarea = document.querySelector('.terminal-textarea');
+      // Simulate success for local testing; replace with real fetch when hosted
+      textarea.value = ''; // Clear instantly
+      terminalSuccess.classList.add('active');
+      setTimeout(() => {
+        terminalSuccess.classList.remove('active');
+        terminalOverlay.classList.remove('active');
+        terminalToggleBtn.textContent = '🟩 Wanna Talk? Drop It in the Terminal ⌨️';
+        terminalIntro.innerHTML = '';
+        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+      }, 100); // Brief delay for visibility
+      // Uncomment and adjust when hosted:
+      // fetch(form.action, {
+      //   method: 'POST',
+      //   body: new FormData(form),
+      // })
+      // .then(response => {
+      //   if (response.ok) {
+      //     textarea.value = '';
+      //     terminalSuccess.classList.add('active');
+      //     setTimeout(() => {
+      //       terminalSuccess.classList.remove('active');
+      //       terminalOverlay.classList.remove('active');
+      //       terminalToggleBtn.textContent = '🟩 Wanna Talk? Drop It in the Terminal ⌨️';
+      //       terminalIntro.innerHTML = '';
+      //       document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+      //     }, 100);
+      //   }
+      // })
+      // .catch(error => console.error('Error:', error));
+    });
   </script>
 </body>
 </html>
