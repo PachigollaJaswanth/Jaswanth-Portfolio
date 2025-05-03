@@ -188,6 +188,7 @@
       align-items: center;
       text-align: left;
       padding: 2rem;
+      overflow-y: hidden;
     }
     #terminal-overlay.active {
       display: flex;
@@ -199,6 +200,7 @@
       line-height: 1.5;
       white-space: pre-wrap;
       max-width: 600px;
+      min-height: 300px; /* Ensure space for success message */
     }
     .terminal-header {
       animation: glitch 0.3s ease-in-out;
@@ -238,13 +240,24 @@
     .terminal-send-btn:hover {
       background: #00b7d4;
     }
+    .terminal-back-btn {
+      background: #00d4ff;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    .terminal-back-btn:hover {
+      background: #00b7d4;
+    }
     .terminal-success {
       color: #00ff00;
       margin-top: 0.5rem;
       display: none;
     }
     .terminal-success.active {
-      display: block;
+      display: block !important;
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(-20px); }
@@ -316,9 +329,14 @@
       .terminal-text {
         font-size: 0.9rem;
         padding: 1rem;
+        min-height: 250px;
       }
       .terminal-textarea {
         font-size: 0.8rem;
+      }
+      .terminal-send-btn, .terminal-back-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
       }
     }
     @media (min-width: 641px) {
@@ -378,7 +396,10 @@
         <textarea class="terminal-textarea terminal-cursor" name="message" placeholder="Type your message here..." required></textarea>
         <input type="hidden" name="_subject" value="New Message from Portfolio Terminal">
         <input type="hidden" name="_captcha" value="false">
-        <button type="submit" class="terminal-send-btn mt-2">Send Message</button>
+        <div class="mt-2 flex space-x-2">
+          <button type="submit" class="terminal-send-btn">Send Message</button>
+          <button type="button" id="terminal-back-btn" class="terminal-back-btn">Back</button>
+        </div>
       </form>
       <div id="terminal-success" class="terminal-success">└─$ Message encrypted & transmitted successfully. ✅</div>
     </div>
@@ -389,7 +410,6 @@
       <h1 class="text-5xl md:text-5xl font-bold mb-4">Jaswanth Pachigolla</h1>
       <p class="text-xl md:text-xl mb-6">SOC Analyst | Cybersecurity Enthusiast | Offensive Security Learner</p>
       <div class="alert-ticker">ALERT: Phishing Detected | Suspicious IP Blocked | CTF Challenge Completed</div>
-      <button onclick="startTerminalAnimation()" class="px-6 py-3 mt-4 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Get in Touch</button>
     </div>
   </section>
 
@@ -644,13 +664,9 @@
   <section id="contact" class="py-6 md:py-20 bg-[#1a1a2e]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#00d4ff] mb-8">Contact</h2>
-      <div class="text-center">
-        <p class="text-lg text-gray-300 mb-4">Email: <a href="mailto:jaswanthsecure@gmail.com" class="text-[#00d4ff] hover:underline">jaswanthsecure@gmail.com</a></p>
-        <p class="text-lg text-gray-300 mb-4">LinkedIn: <a href="https://www.linkedin.com/in/jaswanth-pachigolla-59945b33a/" target="_blank" class="text-[#00d4ff] hover:underline">Jaswanth Pachigolla</a></p>
-        <p class="text-lg text-gray-300 mb-4">Phone: +91-9346081211</p>
-        <div class="mt-4">
-          <a href="https://drive.google.com/file/d/11wJ7Hv2qD21VrVx_u7_o5Ps1Qokpd5zP/view?usp=drive_link" download class="px-4 py-2 bg-[#00d4ff] text-black rounded font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Download Resume</a>
-        </div>
+      <div class="text-center flex justify-center space-x-4">
+        <button onclick="startTerminalAnimation()" class="px-6 py-3 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Get in Touch</button>
+        <a href="https://drive.google.com/uc?export=download&id=11wJ7Hv2qD21VrVx_u7_o5Ps1Qokpd5zP" class="px-6 py-3 bg-[#00d4ff] text-black rounded-full font-semibold hover:bg-[#00b7d4] text-sm md:text-base">Download Resume</a>
       </div>
     </div>
   </section>
@@ -678,7 +694,7 @@
       });
     });
 
-    // Terminal Hack Animation (Home Section)
+    // Terminal Hack Animation (Contact Section)
     function startTerminalAnimation() {
       const overlay = document.getElementById('terminal-overlay');
       const terminalText = document.querySelector('.terminal-text');
@@ -717,6 +733,7 @@
     const terminalOverlay = document.getElementById('terminal-overlay');
     const terminalIntro = document.getElementById('terminal-intro');
     const terminalSuccess = document.getElementById('terminal-success');
+    const terminalBackBtn = document.getElementById('terminal-back-btn');
     const introMessages = [
       '├─$ Hey, hi there! 👋',
       '├─$ If you’d like to drop a message, suggestion, or feedback — you’re at the right terminal.',
@@ -755,22 +772,40 @@
       type();
     }
 
+    // Back Button Functionality
+    terminalBackBtn.addEventListener('click', () => {
+      terminalOverlay.classList.remove('active');
+      terminalToggleBtn.textContent = '🟩 Wanna Talk? Drop It in the Terminal ⌨️';
+      terminalIntro.innerHTML = '';
+      terminalSuccess.classList.remove('active');
+      document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    });
+
     // Form Submission Handling
     document.querySelector('#terminal-overlay form').addEventListener('submit', (e) => {
-      e.preventDefault(); // Prevent default form submission for custom handling
+      e.preventDefault();
       const form = e.target;
       const textarea = document.querySelector('.terminal-textarea');
-      // Simulate success for local testing; replace with real fetch when hosted
-      textarea.value = ''; // Clear instantly
+      const terminalSuccess = document.getElementById('terminal-success');
+
+      // Clear textarea and show success message
+      textarea.value = '';
+      console.log('Adding active class to terminal-success'); // Debugging log
       terminalSuccess.classList.add('active');
+      terminalSuccess.style.display = 'block'; // Fallback to ensure visibility
+
+      // Wait 4 seconds, then close terminal and reset
       setTimeout(() => {
+        console.log('Removing active class from terminal-success'); // Debugging log
         terminalSuccess.classList.remove('active');
+        terminalSuccess.style.display = 'none'; // Fallback reset
         terminalOverlay.classList.remove('active');
         terminalToggleBtn.textContent = '🟩 Wanna Talk? Drop It in the Terminal ⌨️';
         terminalIntro.innerHTML = '';
         document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-      }, 100); // Brief delay for visibility
-      // Uncomment and adjust when hosted:
+      }, 4000);
+
+      // Uncomment and adjust when hosted for real form submission:
       // fetch(form.action, {
       //   method: 'POST',
       //   body: new FormData(form),
@@ -778,14 +813,20 @@
       // .then(response => {
       //   if (response.ok) {
       //     textarea.value = '';
+      //     console.log('Adding active class to terminal-success'); // Debugging log
       //     terminalSuccess.classList.add('active');
+      //     terminalSuccess.style.display = 'block'; // Fallback
       //     setTimeout(() => {
+      //       console.log('Removing active class from terminal-success'); // Debugging log
       //       terminalSuccess.classList.remove('active');
+      //       terminalSuccess.style.display = 'none'; // Fallback reset
       //       terminalOverlay.classList.remove('active');
       //       terminalToggleBtn.textContent = '🟩 Wanna Talk? Drop It in the Terminal ⌨️';
       //       terminalIntro.innerHTML = '';
       //       document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-      //     }, 100);
+      //     }, 4000);
+      //   } else {
+      //     console.error('Form submission failed:', response.status);
       //   }
       // })
       // .catch(error => console.error('Error:', error));
